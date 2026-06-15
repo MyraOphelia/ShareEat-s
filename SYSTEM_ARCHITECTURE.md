@@ -8,36 +8,9 @@ This document describes the high-level architecture of the ShareEat food rescue 
 
 ShareEat is a **client–server web app** with a static frontend and Supabase as the backend (Auth, Database, Storage). There are no custom application servers; the browser talks directly to Supabase.
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                           CLIENT (Browser)                                │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │
-│  │ User (Buyer) │  │   Seller     │  │    Admin     │  │   Public     │  │
-│  │ login/reg    │  │ login/reg    │  │ login/reg    │  │ index.html   │  │
-│  │ user-home    │  │ dashboard    │  │ (admin-*)   │  │ (landing)     │  │
-│  │ bag/checkout │  │ listings    │  │             │  │               │  │
-│  │ pickup       │  │ orders       │  │             │  │               │  │
-│  │ profile      │  │ inventory   │  │             │  │               │  │
-│  │ messages     │  │ messages    │  │             │  │               │  │
-│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘  │
-│         │                 │                 │                 │          │
-│         └─────────────────┴─────────────────┴─────────────────┘          │
-│                                    │                                      │
-│                    supabase-config.js (dual auth clients)                 │
-│                    User: shareeat-user-auth                                │
-│                    Seller/Admin: shareeat-seller-auth                      │
-└────────────────────────────────────┬────────────────────────────────────┘
-                                       │ HTTPS
-                                       ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│                         SUPABASE (BaaS)                                  │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐    │
-│  │ Auth        │  │ Database    │  │ Storage     │  │ RLS         │    │
-│  │ (Email/     │  │ (Postgres)  │  │ (listing-   │  │ (per-table  │    │
-│  │  Google)    │  │             │  │  images)   │  │  policies)  │    │
-│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘    │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+<p align="center">
+  <img src="assets/system-architecture.png" alt="ShareEat system architecture diagram" />
+</p>
 
 ---
 
