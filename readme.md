@@ -71,6 +71,7 @@ Built as a **Final Year Project (2026)** in Software Engineering — designed, d
 | **Security by design** | PostgreSQL Row Level Security (RLS), role-based auth, dual session model |
 | **Multilingual product** | Full UI in English, Bahasa Malaysia, Chinese, and Tamil |
 | **Real-world integrations** | Google Maps, Resend email, Supabase Edge Functions, PWA support |
+| **Mobile-first buyer PWA** | Buyer app optimized for phone; seller & admin portals for desktop |
 | **Documented end-to-end** | Architecture diagrams, schema docs, FYP requirements, 25+ markdown guides |
 
 ### By the numbers
@@ -90,24 +91,24 @@ Built as a **Final Year Project (2026)** in Software Engineering — designed, d
 
 Try the deployed app — no install required.
 
-| Portal | URL | What to explore |
-|--------|-----|-----------------|
-| **Home** | [shareeat-my.vercel.app](https://shareeat-my.vercel.app/) | Landing page & product overview |
-| **Buyer** | [shareeat-my.vercel.app/user](https://shareeat-my.vercel.app/user) | Browse, bag, checkout, pickup flow |
-| **Seller** | [shareeat-my.vercel.app/seller](https://shareeat-my.vercel.app/seller) | Listings, orders, inventory, analytics |
-| **Admin** | [shareeat-my.vercel.app/admin](https://shareeat-my.vercel.app/admin) | Platform management & support tools |
+| Portal | URL | Recommended device |
+|--------|-----|--------------------|
+| **Home** | [shareeat-my.vercel.app](https://shareeat-my.vercel.app/) | Any |
+| **Buyer** | [shareeat-my.vercel.app/user](https://shareeat-my.vercel.app/user) | **Mobile** (PWA) |
+| **Seller** | [shareeat-my.vercel.app/seller](https://shareeat-my.vercel.app/seller) | **Desktop** |
+| **Admin** | [shareeat-my.vercel.app/admin](https://shareeat-my.vercel.app/admin) | **Desktop** |
 
 **Support:** [support@shareeat.my](mailto:support@shareeat.my)
 
-### Screenshots
+### User experience (Buyer)
+
+ShareEat is a **PWA (Progressive Web App)** — optimized for mobile. **Buyers** should use ShareEat on their **phone** (add to home screen for app-like access). **Seller** and **Admin** portals are designed for **desktop** use.
 
 <p align="center">
-  <img src="assets/screenshots/home.png" alt="ShareEat landing page" width="32%" />
-  <img src="assets/screenshots/buyer-home.png" alt="Buyer home — browse surplus listings" width="32%" />
-  <img src="assets/screenshots/seller-portal.png" alt="Seller portal" width="32%" />
+  <img src="assets/screenshots/user-poster.png" alt="ShareEat buyer experience — mobile PWA for browsing and ordering surplus food" width="70%" />
 </p>
 
-<p align="center"><sub>Landing · Buyer browse · Seller portal</sub></p>
+<p align="center"><sub>Buyer journey — browse, order, and collect surplus food on mobile</sub></p>
 
 ---
 
