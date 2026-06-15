@@ -187,13 +187,11 @@ flowchart TD
 
 ### Architecture
 
-```mermaid
-flowchart LR
-    C["Web client<br/>HTML · CSS · JS"] <-->|Supabase JS SDK| S["Supabase<br/>Auth · DB · Storage · RLS"]
-    S -.-> EF["Edge Functions"]
-    C -.-> M["Google Maps"]
-    EF --> R["Resend"]
-```
+<p align="center">
+  <img src="assets/system-architecture.png" alt="ShareEat system architecture diagram" />
+</p>
+
+<p align="center"><em>Users & roles · Frontend (Vercel) · Backend (Supabase) · External APIs (Google Maps, Resend, AI Help Chat)</em></p>
 
 ### Automated tests
 
