@@ -105,7 +105,7 @@ Try the deployed app — no install required.
 ShareEat is a **PWA (Progressive Web App)** — optimized for mobile. **Buyers** should use ShareEat on their **phone** (add to home screen for app-like access). **Seller** and **Admin** portals are designed for **desktop** use.
 
 <p align="center">
-  <img src="assets/screenshots/user-poster.png" alt="ShareEat buyer experience — mobile PWA for browsing and ordering surplus food" width="70%" />
+  <img src="assets/screenshots/user-poster.png" alt="ShareEat buyer experience — mobile PWA for browsing and ordering surplus food" width="100%" />
 </p>
 
 <p align="center"><sub>Buyer journey — browse, order, and collect surplus food on mobile</sub></p>
