@@ -7,25 +7,36 @@
 <h1 align="center">ShareEat</h1>
 
 <p align="center">
-  <strong>Surplus-food marketplace for Malaysia</strong><br />
-  Save food · Save money · Save Earth
+  <strong>Full-stack surplus-food marketplace · Malaysia</strong><br />
+  <em>Save food · Save money · Save Earth</em>
 </p>
 
 <p align="center">
   <a href="https://shareeat-my.vercel.app/"><img src="https://img.shields.io/badge/demo-live-4CAF50?style=flat-square" alt="Live demo" /></a>
+  <img src="https://img.shields.io/badge/FYP-2026-0078D4?style=flat-square" alt="Final Year Project 2026" />
+  <img src="https://img.shields.io/badge/roles-3_portals-purple?style=flat-square" alt="3 role portals" />
+  <img src="https://img.shields.io/badge/i18n-4_languages-orange?style=flat-square" alt="4 languages" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-academic-lightgrey?style=flat-square" alt="License" /></a>
-  <a href="https://vercel.com"><img src="https://img.shields.io/badge/hosted-Vercel-000?style=flat-square&logo=vercel" alt="Vercel" /></a>
-  <a href="https://supabase.com"><img src="https://img.shields.io/badge/backend-Supabase-3FCF8E?style=flat-square&logo=supabase" alt="Supabase" /></a>
+</p>
+
+<p align="center">
+  <a href="https://vercel.com"><img src="https://img.shields.io/badge/Vercel-hosting-000?style=flat-square&logo=vercel&logoColor=white" alt="Vercel" /></a>
+  <a href="https://supabase.com"><img src="https://img.shields.io/badge/Supabase-backend-3FCF8E?style=flat-square&logo=supabase&logoColor=white" alt="Supabase" /></a>
+  <img src="https://img.shields.io/badge/PostgreSQL-RLS-336791?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL RLS" />
+  <img src="https://img.shields.io/badge/JavaScript-vanilla-F7DF1E?style=flat-square&logo=javascript&logoColor=black" alt="Vanilla JS" />
+  <img src="https://img.shields.io/badge/PWA-enabled-5A0FC8?style=flat-square" alt="PWA" />
+  <img src="https://img.shields.io/badge/CI-GitHub_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white" alt="GitHub Actions" />
 </p>
 
 <p align="center">
   <a href="#about">About</a> ·
+  <a href="#highlights">Highlights</a> ·
   <a href="#live-demo">Live demo</a> ·
   <a href="#architecture">Architecture</a> ·
   <a href="#features">Features</a> ·
+  <a href="#engineering">Engineering</a> ·
   <a href="#tech-stack">Tech stack</a> ·
-  <a href="#learn-more">Learn more</a> ·
-  <a href="#roadmap">Roadmap</a> ·
+  <a href="#documentation">Documentation</a> ·
   <a href="#author">Author</a>
 </p>
 
@@ -33,35 +44,76 @@
 
 ## About
 
-**ShareEat** connects food businesses with customers to rescue edible surplus before it is discarded. Sellers list unsold items at reduced prices; buyers browse, order, and collect within a pickup window; administrators oversee users, listings, disputes, and platform operations.
+**ShareEat** is a production-style web platform that connects food businesses with customers to rescue edible surplus before it is discarded. Sellers list unsold items at reduced prices; buyers browse, order, and collect within a pickup window; administrators manage users, disputes, and platform operations.
+
+Built as a **Final Year Project (2026)** in Software Engineering — designed, developed, and deployed end-to-end by a solo developer.
 
 | | |
 |---|---|
 | **Problem** | Edible food is thrown away at closing time while people nearby want affordable meals. |
-| **Solution** | A single platform for listings, checkout, pickup, messaging, notifications, and admin support. |
+| **Solution** | One platform for listings, checkout, pickup, messaging, notifications, and admin support. |
 | **Impact** | Less waste · lower prices · seller revenue recovery · tracked savings (meals, CO₂, RM) |
 | **Market** | Malaysia — multilingual UI (EN / BM / ZH / TA), local maps and addresses |
+| **SDGs** | UN SDG **12** (Responsible Consumption) · SDG **13** (Climate Action) |
 
-> **Public documentation repository.** This repo shares project overview, architecture, and FYP materials. Application source code is **not published** here.
+> **Public documentation repository.** This repo showcases architecture, design decisions, and FYP materials. Application source code is **private** and not published here.
+
+---
+
+## Highlights
+
+> *What makes this more than a CRUD app — built for real users, real roles, and real deployment.*
+
+| | |
+|---|---|
+| **3 role-based portals** | Buyer, Seller, and Admin — each with dedicated workflows and access control |
+| **Live production deploy** | Hosted on Vercel with Supabase backend — not localhost-only |
+| **Security by design** | PostgreSQL Row Level Security (RLS), role-based auth, dual session model |
+| **Multilingual product** | Full UI in English, Bahasa Malaysia, Chinese, and Tamil |
+| **Real-world integrations** | Google Maps, Resend email, Supabase Edge Functions, PWA support |
+| **Documented end-to-end** | Architecture diagrams, schema docs, FYP requirements, 25+ markdown guides |
+
+### By the numbers
+
+| Metric | Count |
+|--------|------:|
+| Web pages (HTML) | 45+ |
+| JavaScript modules | 70+ |
+| SQL migrations & policies | 70+ |
+| User roles | 3 |
+| Supported languages | 4 |
+| Documentation files | 25+ |
 
 ---
 
 ## Live demo
 
-| Portal | URL |
-|--------|-----|
-| **Home** | [shareeat-my.vercel.app](https://shareeat-my.vercel.app/) |
-| **Buyer** | [shareeat-my.vercel.app/user](https://shareeat-my.vercel.app/user) |
-| **Seller** | [shareeat-my.vercel.app/seller](https://shareeat-my.vercel.app/seller) |
-| **Admin** | [shareeat-my.vercel.app/admin](https://shareeat-my.vercel.app/admin) |
+Try the deployed app — no install required.
+
+| Portal | URL | What to explore |
+|--------|-----|-----------------|
+| **Home** | [shareeat-my.vercel.app](https://shareeat-my.vercel.app/) | Landing page & product overview |
+| **Buyer** | [shareeat-my.vercel.app/user](https://shareeat-my.vercel.app/user) | Browse, bag, checkout, pickup flow |
+| **Seller** | [shareeat-my.vercel.app/seller](https://shareeat-my.vercel.app/seller) | Listings, orders, inventory, analytics |
+| **Admin** | [shareeat-my.vercel.app/admin](https://shareeat-my.vercel.app/admin) | Platform management & support tools |
 
 **Support:** [support@shareeat.my](mailto:support@shareeat.my)
+
+### Screenshots
+
+<p align="center">
+  <img src="assets/screenshots/home.png" alt="ShareEat landing page" width="32%" />
+  <img src="assets/screenshots/buyer-home.png" alt="Buyer home — browse surplus listings" width="32%" />
+  <img src="assets/screenshots/seller-portal.png" alt="Seller portal" width="32%" />
+</p>
+
+<p align="center"><sub>Landing · Buyer browse · Seller portal</sub></p>
 
 ---
 
 ## Architecture
 
-ShareEat is a web application hosted on **Vercel**, with **Supabase** handling authentication, database, storage, and server-side logic.
+ShareEat uses a **static frontend on Vercel** with **Supabase** as the backend (PostgreSQL, Auth, Storage, RLS, Edge Functions). The browser communicates directly with Supabase — no custom Node/API server to maintain.
 
 <p align="center">
   <img src="assets/system-architecture.png" alt="ShareEat system architecture — users, Vercel frontend, Supabase backend, and external APIs" width="100%" />
@@ -69,7 +121,7 @@ ShareEat is a web application hosted on **Vercel**, with **Supabase** handling a
 
 <p align="center"><sub>Users & roles · Frontend (Vercel) · Backend (Supabase) · External APIs (Google Maps, Resend, AI Help Chat)</sub></p>
 
-**Order flow (simplified):**
+**Order flow:**
 
 ```mermaid
 flowchart LR
@@ -78,6 +130,8 @@ flowchart LR
     S --> C
     C --> A[Admin support if needed]
 ```
+
+Deep dive → **[SYSTEM_ARCHITECTURE.md](SYSTEM_ARCHITECTURE.md)** · **[SYSTEM_DESIGN.md](SYSTEM_DESIGN.md)** · **[BACKEND.md](BACKEND.md)**
 
 ---
 
@@ -108,28 +162,71 @@ flowchart LR
 
 ---
 
+## Engineering
+
+Technical decisions that matter to developers reviewing this project.
+
+### Key design choices
+
+| Decision | Rationale |
+|----------|-----------|
+| **Supabase BaaS** | Auth, Postgres, Storage, and RLS in one platform — ship faster without maintaining a custom API server |
+| **Vanilla JavaScript** | No framework lock-in; direct control over performance, PWA behaviour, and page-level logic |
+| **Dual auth clients** | Separate Supabase sessions for buyer vs seller/admin so one browser can hold both roles in different tabs |
+| **RLS-first security** | Data access enforced at the database layer — not only in frontend code |
+| **DB triggers & RPCs** | Stock sync, order lifecycle, and inventory consistency handled server-side |
+| **Edge Functions** | Admin broadcast email and scheduled jobs without a dedicated backend host |
+
+### Quality & reliability
+
+- Automated tests for checkout math and i18n key parity
+- GitHub Actions CI on push
+- Pre-push secret scanning (`check-secrets`)
+- Docker option for reproducible local runs
+- Playwright E2E test suite (source repo)
+
+### Skills demonstrated
+
+`System Design` · `Full-Stack Development` · `PostgreSQL & RLS` · `REST / Supabase SDK` · `OAuth & Session Auth` · `Cloud Deployment (Vercel)` · `Third-Party API Integration` · `Responsive / Mobile UI` · `Internationalization (i18n)` · `Technical Documentation` · `CI/CD` · `Security Awareness`
+
+---
+
 ## Tech stack
 
 | Layer | Technologies |
 |-------|----------------|
-| **Frontend** | HTML5, CSS3, JavaScript, PWA, responsive mobile design |
-| **Portals** | Buyer · Seller · Admin |
-| **Backend** | Supabase (PostgreSQL, Auth, Storage, Edge Functions) |
-| **Email** | Resend |
-| **Maps** | Google Maps Platform |
-| **Hosting** | Vercel |
+| **Frontend** | HTML5, CSS3, vanilla JavaScript, PWA, responsive mobile nav |
+| **Portals** | Buyer · Seller · Admin (single codebase) |
+| **Backend** | Supabase — PostgreSQL, Auth, Storage, RLS, Edge Functions |
+| **Email** | Resend (`shareeat.my`) |
+| **Maps** | Google Maps JavaScript API + Geocoding API |
+| **Hosting** | Vercel (primary), Docker optional |
+| **Tooling** | Node.js, Playwright, GitHub Actions |
+
+| Integration | Purpose |
+|-------------|---------|
+| Supabase Auth | Email login, Google OAuth, role-based sessions |
+| Supabase PostgREST | Orders, listings, chat, notifications, disputes |
+| Supabase Storage | Listing images |
+| Supabase Edge Functions | Admin broadcast, scheduled jobs |
+| Google Maps / Geocoding | Map browse, shop pins, address geocoding |
+| Resend | Transactional and admin email |
+
+> Checkout UI includes FPX / card flows; live payment gateway is on the [roadmap](#roadmap).
 
 ---
 
-## Learn more
+## Documentation
 
 Public documentation in this repository:
 
 | Topic | Document |
 |-------|----------|
 | System architecture | [SYSTEM_ARCHITECTURE.md](SYSTEM_ARCHITECTURE.md) |
-| System design | [SYSTEM_DESIGN.md](SYSTEM_DESIGN.md) |
-| Backend overview | [BACKEND.md](BACKEND.md) |
+| System design & decisions | [SYSTEM_DESIGN.md](SYSTEM_DESIGN.md) |
+| Backend & data flow | [BACKEND.md](BACKEND.md) |
+| Class / data model | [docs/CLASS-DIAGRAM.md](docs/CLASS-DIAGRAM.md) |
+| Schema visualization | [docs/SCHEMA-VISUALIZATION.md](docs/SCHEMA-VISUALIZATION.md) |
 | Business & revenue model | [REVENUE_EXPLAINED.md](REVENUE_EXPLAINED.md) |
 | FYP requirements | [docs/FYP_FUNCTIONAL_REQUIREMENTS_TABLE.md](docs/FYP_FUNCTIONAL_REQUIREMENTS_TABLE.md) |
 | FYP demo & report guide | [docs/FYP-RUNBOOK.md](docs/FYP-RUNBOOK.md) |
@@ -145,7 +242,7 @@ Public documentation in this repository:
 - Order disputes, admin replies, in-app notifications
 - Multi-language UI (EN / BM / ZH / TA)
 - Impact tracking, badges, AI help chat
-- Mobile bottom navigation
+- Mobile bottom navigation, automated tests, CI
 
 **Planned**
 
@@ -158,14 +255,23 @@ Public documentation in this repository:
 
 ## Author
 
-| | |
-|---|---|
-| **Name** | Myra Ophelia Iman Binti Maurice Feizal |
-| **Programme** | Bachelor of Software Engineering — Final Year Project |
-| **Year** | 2026 |
-| **Version** | v1.0 |
+<table>
+  <tr>
+    <td width="120"><img src="assets/logo.png" alt="ShareEat" width="80" /></td>
+    <td>
+      <strong>Myra Ophelia Iman Binti Maurice Feizal</strong><br />
+      Bachelor of Software Engineering · Final Year Project · 2026<br /><br />
+      Full-stack developer — designed, built, and deployed ShareEat end-to-end.<br /><br />
+      <!-- Replace # with your profile URLs -->
+      <a href="https://github.com/MyraOphelia">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/myra-ophelia-iman">LinkedIn</a> ·
+      <a href="mailto:support@shareeat.my">Email</a> ·
+      <a href="https://shareeat-my.vercel.app/">Live demo</a>
+    </td>
+  </tr>
+</table>
 
-ShareEat aligns with UN SDGs **12** (Responsible Consumption) and **13** (Climate Action).
+**Interested in the project?** Star this repo, try the [live demo](https://shareeat-my.vercel.app/), or connect on LinkedIn — happy to walk through the architecture.
 
 ---
 

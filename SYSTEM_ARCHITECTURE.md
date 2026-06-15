@@ -192,8 +192,7 @@ PROJECT_02_2026/
 │   ├── user-home.js, (bag, listing-detail…)        # Browse & cart
 │   ├── seller-orders.js, seller-inventory.js, seller-messages.js, …
 │   └── notification-check.js                       # Unread message toasts
-├── supabase-*.sql                                 # Schema, RLS, triggers, RPCs
-├── SUPABASE_SETUP.md                              # Setup instructions
+├── supabase-*.sql                                 # Schema, RLS, triggers, RPCs (private source repo)
 └── SYSTEM_ARCHITECTURE.md                         # This document
 ```
 
