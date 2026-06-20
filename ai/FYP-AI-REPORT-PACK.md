@@ -8,7 +8,7 @@ Copy sections below into your report. Open the visual diagram at **[ai-architect
 
 **Figure 4.X Layered Architecture of the ShareEat AI Assistant**
 
-Use the HTML diagram (`docs/ai-architecture-diagram.html`) or export as PNG for Word.
+Use the HTML diagram ([ai-architecture-diagram.html](./ai-architecture-diagram.html)) or export as PNG for Word.
 
 **Mermaid (for draw.io / Mermaid Live Editor):**
 
@@ -98,4 +98,4 @@ flowchart TB
 
 *Prepared for CPT6314 Project II — ShareEat (Myra Ophelia Iman Maurice Feizal)*
 
-<p align="center"><a href="../README.md">← Back to main README</a></p>
+<p align="center"><a href="README.md">← AI docs index</a> · <a href="../README.md">Main README</a></p>

@@ -16,7 +16,7 @@ Portfolio and FYP documentation for **ShareEat**. For the live app, see **[share
 | Backend & data flow | [BACKEND.md](../BACKEND.md) |
 | FYP requirements table | [FYP_FUNCTIONAL_REQUIREMENTS_TABLE.md](FYP_FUNCTIONAL_REQUIREMENTS_TABLE.md) |
 | FYP demo & report tips | [FYP-RUNBOOK.md](FYP-RUNBOOK.md) |
-| FYP AI report pack (Ch. 4 & 6) | [FYP-AI-REPORT-PACK.md](FYP-AI-REPORT-PACK.md) |
+| AI assistant (separate folder) | [../ai/README.md](../ai/README.md) |
 
 ---
 
@@ -39,16 +39,6 @@ Portfolio and FYP documentation for **ShareEat**. For the live app, see **[share
 |------|----------------|
 | [FYP_FUNCTIONAL_REQUIREMENTS_TABLE.md](FYP_FUNCTIONAL_REQUIREMENTS_TABLE.md) | Functional requirements for report |
 | [FYP-RUNBOOK.md](FYP-RUNBOOK.md) | Demo links, screenshots, report tips |
-| [FYP-AI-REPORT-PACK.md](FYP-AI-REPORT-PACK.md) | AI architecture, test table, viva script (Ch. 4 & 6) |
-| [ai-architecture-diagram.html](ai-architecture-diagram.html) | AI layered architecture figure (export PNG) |
-
----
-
-## Product
-
-| File | What it covers |
-|------|----------------|
-| [AI-ASSISTANT.md](AI-ASSISTANT.md) | Help chat widget overview |
 
 ---
 
