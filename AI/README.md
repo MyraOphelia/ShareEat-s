@@ -1,28 +1,30 @@
-# ShareEat — AI Assistant Documentation
+# ShareEat — AI Help Chat
 
-Documentation for the ShareEat **AI Help Chat** module (FYP report, architecture, testing, viva demo).
+Developer documentation for the **AI Help Chat** module on buyer-facing pages.
 
-Main project overview: **[README.md](../README.md)**
-
----
-
-## Files in this folder
-
-| File | What it covers |
-|------|----------------|
-| [FYP-AI-REPORT-PACK.md](FYP-AI-REPORT-PACK.md) | Copy-paste for **Chapter 4 & 6** — architecture, test table, limitations, viva script |
-| [AI-ARCHITECTURE-DIAGRAM.HTML](AI-ARCHITECTURE-DIAGRAM.HTML) | Layered AI architecture figure — open in browser, export PNG for Word |
-| [AI-ASSISTANT.md](AI-ASSISTANT.md) | Help chat widget — tiers, escalation, implementation overview |
+Main project overview → **[README.md](../README.md)**
 
 ---
 
-## Quick links
+## Start here
 
-| I want to… | Go here |
-|------------|---------|
-| Paste into FYP report | [FYP-AI-REPORT-PACK.md](FYP-AI-REPORT-PACK.md) |
-| Export architecture diagram | [AI-ARCHITECTURE-DIAGRAM.HTML](AI-ARCHITECTURE-DIAGRAM.HTML) |
-| Understand how the chat works | [AI-ASSISTANT.md](AI-ASSISTANT.md) |
+| Doc | Purpose |
+|-----|---------|
+| **[HOW-IT-WORKS.md](./HOW-IT-WORKS.md)** | Architecture, response pipeline, config, security, testing |
+| **[AI-ASSISTANT.md](./AI-ASSISTANT.md)** | Feature reference, database schema, storage keys, page integration |
+| **[AI-ARCHITECTURE-DIAGRAM.HTML](./AI-ARCHITECTURE-DIAGRAM.HTML)** | Visual layered architecture — open in browser |
+
+---
+
+## Quick reference
+
+**Pipeline:** Rules → FAQ (`chat_knowledge`) → Live listings → Groq LLM (`ai_chat` Edge Function)
+
+**Client:** `js/chat-widget.js` · `chat-widget.css`
+
+**Secrets:** `LLM_API_KEY`, `LLM_BASE_URL`, `LLM_MODEL` on Supabase Edge Function (never in frontend)
+
+**Admin:** `admin-chat-logs.html` — CSAT, escalations, unmatched queries
 
 ---
 

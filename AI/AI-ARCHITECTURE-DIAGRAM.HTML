@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ShareEat — AI Assistant Architecture (FYP Figure)</title>
+  <title>ShareEat — AI Assistant Architecture</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <style>
@@ -104,9 +104,9 @@
   <div class="wrap">
     <header>
       <h1>ShareEat AI Assistant — Layered Architecture</h1>
-      <p>Figure for Chapter 4 / Implementation — export via screenshot or Print → PDF</p>
+      <p>Layered response pipeline — export via screenshot or Print → PDF</p>
     </header>
-    <p class="fig-label">Figure 4.X — AI Assistant response pipeline</p>
+    <p class="fig-label">AI Assistant response pipeline</p>
 
     <div class="diagram">
       <div class="flow">
@@ -156,7 +156,6 @@
       </div>
 
       <p class="caption">
-        <strong>Figure 4.X</strong> illustrates the layered architecture of the ShareEat AI Assistant.
         User input is processed sequentially through rule-based logic, a trainable FAQ store,
         and live listing retrieval before optional invocation of Groq via the <code>ai_chat</code>
         Edge Function. The Groq API key is never exposed to the browser.

@@ -1,8 +1,8 @@
-# ShareEat AI Assistant – Documentation
+# ShareEat AI Assistant — Implementation Reference
 
-**System prompt (for LLM / Cursor):** kept in the private source repository (`SHAREEAT_AI_SYSTEM_PROMPT.md`).
+Floating chat widget (bottom-right) on buyer pages. For architecture and pipeline flow, see **[HOW-IT-WORKS.md](./HOW-IT-WORKS.md)**.
 
-Floating chat widget (bottom-right) that helps users with ShareEat FAQs, support, and live listing data.
+**System prompt:** private source repo only (`SHAREEAT_AI_SYSTEM_PROMPT.md`).
 
 ---
 
@@ -12,7 +12,7 @@ Floating chat widget (bottom-right) that helps users with ShareEat FAQs, support
 |------|---------|
 | **Files** | `js/chat-widget.js`, `chat-widget.css` |
 | **Pages** | user-home, map, bag, profile, checkout, shop-detail, user-listing-detail, pickup |
-| **Type** | Rule-based (no external AI API by default) |
+| **Pipeline** | Rules → FAQ → live listings → Groq LLM via `ai_chat` Edge Function |
 | **Storage** | `localStorage` + `sessionStorage` for history; Supabase for messages & escalations |
 
 ---
@@ -239,13 +239,14 @@ Pages can set context for tailored replies:
 
 ---
 
-## Future AI API
+## LLM integration (Tier 4)
 
-To plug in an external AI API:
+Production uses Supabase Edge Function **`ai_chat`** → Groq `llama-3.1-8b-instant`. See **[HOW-IT-WORKS.md](./HOW-IT-WORKS.md#configuration)** for secrets and security.
 
-1. Set `window.SHAREEAT_AI_API_URL` to your endpoint.
-2. Implement `getAiReplyFromApi()` in `chat-widget.js` to call it.
-3. API should accept `{ message, history, context }` and return `{ reply }`.
+To point at a different endpoint in local dev:
+
+1. Set `window.SHAREEAT_AI_API_URL` (defaults to `ai_chat`).
+2. Endpoint accepts `{ message, history, context }` and returns `{ reply }`.
 
 ---
 

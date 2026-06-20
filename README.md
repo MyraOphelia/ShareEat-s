@@ -224,7 +224,7 @@ ShareEat-s/
 ├── README.md          ← Project overview (you are here)
 ├── LICENSE
 ├── DOCS/              ← Architecture, design, backend, FYP
-├── AI/                ← AI assistant module (report pack, diagram)
+├── AI/                ← AI help chat — architecture & implementation docs
 └── ASSETS/            ← Logo, diagrams, screenshots
 ```
 
@@ -238,7 +238,7 @@ ShareEat-s/
 | Business & revenue model | [DOCS/REVENUE_EXPLAINED.md](DOCS/REVENUE_EXPLAINED.md) |
 | FYP requirements | [DOCS/FYP_FUNCTIONAL_REQUIREMENTS_TABLE.md](DOCS/FYP_FUNCTIONAL_REQUIREMENTS_TABLE.md) |
 | FYP demo & report guide | [DOCS/FYP-RUNBOOK.md](DOCS/FYP-RUNBOOK.md) |
-| AI assistant (FYP Ch. 4 & 6) | [AI/README.md](AI/README.md) |
+| AI help chat (how it works) | [AI/HOW-IT-WORKS.md](AI/HOW-IT-WORKS.md) |
 | Full doc index | [DOCS/README.md](DOCS/README.md) |
 
 ---
