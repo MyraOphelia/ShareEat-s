@@ -1,6 +1,6 @@
 # ShareEat AI Assistant – Documentation
 
-**System prompt (for LLM / Cursor):** [`docs/SHAREEAT_AI_SYSTEM_PROMPT.md`](./SHAREEAT_AI_SYSTEM_PROMPT.md)
+**System prompt (for LLM / Cursor):** kept in the private source repository (`SHAREEAT_AI_SYSTEM_PROMPT.md`).
 
 Floating chat widget (bottom-right) that helps users with ShareEat FAQs, support, and live listing data.
 

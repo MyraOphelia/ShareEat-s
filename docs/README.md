@@ -6,17 +6,30 @@ Portfolio and FYP documentation for **ShareEat**. For the live app, see **[share
 
 ---
 
+## Repository layout
+
+```
+ShareEat-s/
+├── README.md
+├── LICENSE
+├── DOCS/              ← You are here
+├── AI/                ← AI assistant module
+└── ASSETS/            ← Images & screenshots
+```
+
+---
+
 ## Quick navigation
 
 | I want to… | Read this |
 |------------|-----------|
 | Project overview & live demo | [README.md](../README.md) |
-| Understand architecture | [SYSTEM_ARCHITECTURE.md](../SYSTEM_ARCHITECTURE.md) |
-| Design goals & decisions | [SYSTEM_DESIGN.md](../SYSTEM_DESIGN.md) |
-| Backend & data flow | [BACKEND.md](../BACKEND.md) |
+| Understand architecture | [SYSTEM_ARCHITECTURE.md](SYSTEM_ARCHITECTURE.md) |
+| Design goals & decisions | [SYSTEM_DESIGN.md](SYSTEM_DESIGN.md) |
+| Backend & data flow | [BACKEND.md](BACKEND.md) |
 | FYP requirements table | [FYP_FUNCTIONAL_REQUIREMENTS_TABLE.md](FYP_FUNCTIONAL_REQUIREMENTS_TABLE.md) |
 | FYP demo & report tips | [FYP-RUNBOOK.md](FYP-RUNBOOK.md) |
-| AI assistant (separate folder) | [../ai/README.md](../ai/README.md) |
+| AI assistant module | [../AI/README.md](../AI/README.md) |
 
 ---
 
@@ -24,12 +37,12 @@ Portfolio and FYP documentation for **ShareEat**. For the live app, see **[share
 
 | File | What it covers |
 |------|----------------|
-| [SYSTEM_ARCHITECTURE.md](../SYSTEM_ARCHITECTURE.md) | Roles, pages, database schema overview |
-| [SYSTEM_DESIGN.md](../SYSTEM_DESIGN.md) | Design objectives, context, flows |
-| [BACKEND.md](../BACKEND.md) | Supabase, RLS, triggers, data flow |
+| [SYSTEM_ARCHITECTURE.md](SYSTEM_ARCHITECTURE.md) | Roles, pages, database schema overview |
+| [SYSTEM_DESIGN.md](SYSTEM_DESIGN.md) | Design objectives, context, flows |
+| [BACKEND.md](BACKEND.md) | Supabase, RLS, triggers, data flow |
 | [CLASS-DIAGRAM.md](CLASS-DIAGRAM.md) | Class / component diagrams |
 | [SCHEMA-VISUALIZATION.md](SCHEMA-VISUALIZATION.md) | Table relationships |
-| [REVENUE_EXPLAINED.md](../REVENUE_EXPLAINED.md) | Commission, fees, seller revenue |
+| [REVENUE_EXPLAINED.md](REVENUE_EXPLAINED.md) | Commission, fees, seller revenue |
 
 ---
 

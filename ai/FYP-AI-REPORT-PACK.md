@@ -1,6 +1,6 @@
 # ShareEat FYP — AI Report Pack (Chapter 4, 6 & Demo)
 
-Copy sections below into your report. Open the visual diagram at **[ai-architecture-diagram.html](./ai-architecture-diagram.html)** in a browser (or serve this repo locally).
+Copy sections below into your report. Open the visual diagram at **[AI-ARCHITECTURE-DIAGRAM.HTML](./AI-ARCHITECTURE-DIAGRAM.HTML)** in a browser.
 
 ---
 
@@ -8,7 +8,7 @@ Copy sections below into your report. Open the visual diagram at **[ai-architect
 
 **Figure 4.X Layered Architecture of the ShareEat AI Assistant**
 
-Use the HTML diagram ([ai-architecture-diagram.html](./ai-architecture-diagram.html)) or export as PNG for Word.
+Use the HTML diagram ([AI-ARCHITECTURE-DIAGRAM.HTML](./AI-ARCHITECTURE-DIAGRAM.HTML)) or export as PNG for Word.
 
 **Mermaid (for draw.io / Mermaid Live Editor):**
 
@@ -91,7 +91,7 @@ flowchart TB
 - [ ] Edge Function secrets set: `LLM_API_KEY`, `LLM_BASE_URL`, `LLM_MODEL`
 - [ ] Live app or local dev: hard refresh (Cmd+Shift+R)
 - [ ] Run demo script steps 1–3 once before viva
-- [ ] Export diagram PNG from `ai-architecture-diagram.html` for report
+- [ ] Export diagram PNG from `AI-ARCHITECTURE-DIAGRAM.HTML` for report
 - [ ] Fill **Actual result / Pass** column in Table 6.X after testing
 
 ---

@@ -9,7 +9,7 @@ This document describes the high-level architecture of the ShareEat food rescue 
 ShareEat is a **client–server web app** with a static frontend and Supabase as the backend (Auth, Database, Storage). There are no custom application servers; the browser talks directly to Supabase.
 
 <p align="center">
-  <img src="assets/system-architecture.png" alt="ShareEat system architecture diagram" />
+  <img src="../ASSETS/SYSTEM-ARCHITECTURE.PNG" alt="ShareEat system architecture diagram" />
 </p>
 
 ---

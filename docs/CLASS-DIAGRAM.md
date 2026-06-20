@@ -1150,7 +1150,7 @@ classDiagram
 | **GitHub** | Push repo; diagrams render in README/docs preview |
 | **Mermaid Live** | Copy a ` ```mermaid ` block to [https://mermaid.live](https://mermaid.live) → PNG/SVG |
 | **draw.io** | Import or redraw from §2 entity table |
-| **Live ER diagram** | See `docs/SCHEMA-VISUALIZATION.md` (DBeaver from Supabase) |
+| **Live ER diagram** | See [SCHEMA-VISUALIZATION.md](SCHEMA-VISUALIZATION.md) (DBeaver from Supabase) |
 
 ### Suggested FYP figure order
 

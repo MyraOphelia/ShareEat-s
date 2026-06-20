@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://shareeat-my.vercel.app/">
-    <img src="assets/logo.png" alt="ShareEat logo" width="120" />
+    <img src="ASSETS/LOGO.PNG" alt="ShareEat logo" width="120" />
   </a>
 </p>
 
@@ -105,7 +105,7 @@ Try the deployed app — no install required.
 ShareEat is a **PWA (Progressive Web App)** — optimized for mobile. **Buyers** should use ShareEat on their **phone** (add to home screen for app-like access). **Seller** and **Admin** portals are designed for **desktop** use.
 
 <p align="center">
-  <img src="assets/screenshots/user-poster.png" alt="ShareEat buyer experience — mobile PWA for browsing and ordering surplus food" width="100%" />
+  <img src="ASSETS/SCREENSHOTS/USER-POSTER.PNG" alt="ShareEat buyer experience — mobile PWA for browsing and ordering surplus food" width="100%" />
 </p>
 
 <p align="center"><sub>Buyer journey — browse, order, and collect surplus food on mobile</sub></p>
@@ -117,7 +117,7 @@ ShareEat is a **PWA (Progressive Web App)** — optimized for mobile. **Buyers**
 ShareEat uses a **static frontend on Vercel** with **Supabase** as the backend (PostgreSQL, Auth, Storage, RLS, Edge Functions). The browser communicates directly with Supabase — no custom Node/API server to maintain.
 
 <p align="center">
-  <img src="assets/system-architecture.png" alt="ShareEat system architecture — users, Vercel frontend, Supabase backend, and external APIs" width="100%" />
+  <img src="ASSETS/SYSTEM-ARCHITECTURE.PNG" alt="ShareEat system architecture — users, Vercel frontend, Supabase backend, and external APIs" width="100%" />
 </p>
 
 <p align="center"><sub>Users & roles · Frontend (Vercel) · Backend (Supabase) · External APIs (Google Maps, Resend, AI Help Chat)</sub></p>
@@ -132,7 +132,7 @@ flowchart LR
     C --> A[Admin support if needed]
 ```
 
-Deep dive → **[SYSTEM_ARCHITECTURE.md](SYSTEM_ARCHITECTURE.md)** · **[SYSTEM_DESIGN.md](SYSTEM_DESIGN.md)** · **[BACKEND.md](BACKEND.md)**
+Deep dive → **[DOCS/SYSTEM_ARCHITECTURE.md](DOCS/SYSTEM_ARCHITECTURE.md)** · **[DOCS/SYSTEM_DESIGN.md](DOCS/SYSTEM_DESIGN.md)** · **[DOCS/BACKEND.md](DOCS/BACKEND.md)**
 
 ---
 
@@ -219,19 +219,27 @@ Technical decisions that matter to developers reviewing this project.
 
 ## Documentation
 
-Public documentation in this repository:
+```
+ShareEat-s/
+├── README.md          ← Project overview (you are here)
+├── LICENSE
+├── DOCS/              ← Architecture, design, backend, FYP
+├── AI/                ← AI assistant module (report pack, diagram)
+└── ASSETS/            ← Logo, diagrams, screenshots
+```
 
 | Topic | Document |
 |-------|----------|
-| System architecture | [SYSTEM_ARCHITECTURE.md](SYSTEM_ARCHITECTURE.md) |
-| System design & decisions | [SYSTEM_DESIGN.md](SYSTEM_DESIGN.md) |
-| Backend & data flow | [BACKEND.md](BACKEND.md) |
-| Class / data model | [docs/CLASS-DIAGRAM.md](docs/CLASS-DIAGRAM.md) |
-| Schema visualization | [docs/SCHEMA-VISUALIZATION.md](docs/SCHEMA-VISUALIZATION.md) |
-| Business & revenue model | [REVENUE_EXPLAINED.md](REVENUE_EXPLAINED.md) |
-| FYP requirements | [docs/FYP_FUNCTIONAL_REQUIREMENTS_TABLE.md](docs/FYP_FUNCTIONAL_REQUIREMENTS_TABLE.md) |
-| FYP demo & report guide | [docs/FYP-RUNBOOK.md](docs/FYP-RUNBOOK.md) |
-| Full doc index | [docs/README.md](docs/README.md) |
+| System architecture | [DOCS/SYSTEM_ARCHITECTURE.md](DOCS/SYSTEM_ARCHITECTURE.md) |
+| System design & decisions | [DOCS/SYSTEM_DESIGN.md](DOCS/SYSTEM_DESIGN.md) |
+| Backend & data flow | [DOCS/BACKEND.md](DOCS/BACKEND.md) |
+| Class / data model | [DOCS/CLASS-DIAGRAM.md](DOCS/CLASS-DIAGRAM.md) |
+| Schema visualization | [DOCS/SCHEMA-VISUALIZATION.md](DOCS/SCHEMA-VISUALIZATION.md) |
+| Business & revenue model | [DOCS/REVENUE_EXPLAINED.md](DOCS/REVENUE_EXPLAINED.md) |
+| FYP requirements | [DOCS/FYP_FUNCTIONAL_REQUIREMENTS_TABLE.md](DOCS/FYP_FUNCTIONAL_REQUIREMENTS_TABLE.md) |
+| FYP demo & report guide | [DOCS/FYP-RUNBOOK.md](DOCS/FYP-RUNBOOK.md) |
+| AI assistant (FYP Ch. 4 & 6) | [AI/README.md](AI/README.md) |
+| Full doc index | [DOCS/README.md](DOCS/README.md) |
 
 ---
 
@@ -258,7 +266,7 @@ Public documentation in this repository:
 
 <table>
   <tr>
-    <td width="120"><img src="assets/logo.png" alt="ShareEat" width="80" /></td>
+    <td width="120"><img src="ASSETS/LOGO.PNG" alt="ShareEat" width="80" /></td>
     <td>
       <strong>Myra Ophelia Iman Binti Maurice Feizal</strong><br />
       Bachelor of Software Engineering · Final Year Project · 2026<br /><br />
