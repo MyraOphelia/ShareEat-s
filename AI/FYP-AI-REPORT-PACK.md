@@ -32,7 +32,7 @@ flowchart TB
 
 **Figure caption (paste under diagram):**
 
-> Figure 4.X illustrates the layered architecture of the ShareEat AI Assistant. User input is evaluated sequentially through a rule-based engine, a trainable FAQ database (`chat_knowledge`), and live listing retrieval from Supabase. Only unresolved queries invoke the Groq large language model via the `ai_chat` Supabase Edge Function, where the API key is stored server-side. All response paths converge in the chat interface, which supports follow-up chips and satisfaction feedback.
+>The illustrates the layered architecture of the ShareEat AI Assistant. User input is evaluated sequentially through a rule-based engine, a trainable FAQ database (`chat_knowledge`), and live listing retrieval from Supabase. Only unresolved queries invoke the Groq large language model via the `ai_chat` Supabase Edge Function, where the API key is stored server-side. All response paths converge in the chat interface, which supports follow-up chips and satisfaction feedback.
 
 ---
 
