@@ -36,6 +36,7 @@
   <a href="#features">Features</a> ·
   <a href="#engineering">Engineering</a> ·
   <a href="#tech-stack">Tech stack</a> ·
+  <a href="#ai-assistant--fyp-report-pack-chapters-4--6">AI (FYP)</a> ·
   <a href="#documentation">Documentation</a> ·
   <a href="#author">Author</a>
 </p>
@@ -217,7 +218,67 @@ Technical decisions that matter to developers reviewing this project.
 
 ---
 
-## Documentation
+## AI Assistant — FYP Report Pack (Chapters 4 & 6)
+
+Copy-paste sections for your **CPT6314 Project II** report, viva demo, and testing.  
+**Full pack:** [docs/FYP-AI-REPORT-PACK.md](docs/FYP-AI-REPORT-PACK.md) · **Visual diagram:** [docs/ai-architecture-diagram.html](docs/ai-architecture-diagram.html) (open in browser → export PNG for Word)
+
+### Chapter 4 — AI architecture
+
+**Figure 4.X Layered Architecture of the ShareEat AI Assistant**
+
+```mermaid
+flowchart TB
+  U[User message in chat widget] --> R{Tier 1: Rule engine}
+  R -->|match| O1[Deterministic reply]
+  R -->|no match| K{Tier 2: chat_knowledge FAQ}
+  K -->|match| O2[FAQ answer]
+  K -->|no match| L{Tier 3: Listing intent?}
+  L -->|yes| DB[(Supabase listings)]
+  DB --> O3[Text + mini-cards + View links]
+  L -->|no| EF[ai_chat Edge Function]
+  EF --> G[Groq llama-3.1-8b-instant]
+  G --> O4[LLM reply]
+  O1 --> UI[Chat UI + follow-up chips + CSAT]
+  O2 --> UI
+  O3 --> UI
+  O4 --> UI
+```
+
+> Figure 4.X illustrates the layered architecture of the ShareEat AI Assistant. User input is evaluated sequentially through a rule-based engine, a trainable FAQ database (`chat_knowledge`), and live listing retrieval from Supabase. Only unresolved queries invoke the Groq large language model via the `ai_chat` Supabase Edge Function, where the API key is stored server-side.
+
+**One-liner:** Rules → FAQ → Live listings → Groq via Edge Function — API key never in the browser.
+
+### Chapter 6 — AI test table (summary)
+
+| Test ID | Category | Test input | Expected result |
+|---------|----------|------------|-----------------|
+| T-AI-01 | Rule engine | “Can I cancel after the store confirms?” | Pending vs confirmed cancellation reply |
+| T-AI-02 | Live listings | “List free food” | Free listings from DB with View links |
+| T-AI-03 | Live listings | “Show cheap options” | Listings sorted by price |
+| T-AI-04 | FAQ | “What makes ShareEat different from delivery apps?” | Pickup-only answer |
+| T-AI-05 | Navigation | Tap “Go to Profile” chip | Redirect to profile |
+| T-AI-06 | Rate limiting | 11+ messages in 1 minute | Rate-limit message |
+| T-AI-07 | LLM fallback | Creative open-ended question | Groq-generated reply |
+| T-AI-08 | LLM proxy | POST to `ai_chat` Edge Function | JSON `{ "reply": "..." }` |
+| T-AI-09 | Security | Network tab on LLM query | No Groq key in client |
+| T-AI-10 | CSAT | Thumbs down on reply | Feedback acknowledgment |
+
+Full table with **Actual result / Pass** columns → [docs/FYP-AI-REPORT-PACK.md](docs/FYP-AI-REPORT-PACK.md)
+
+### Viva demo script (~2 min)
+
+| Step | Say to examiner | Type in chat |
+|------|-----------------|--------------|
+| 1 | “First, live data — not AI guessing.” | **List free food** |
+| 2 | “Second, FAQ database — no API cost.” | **What makes ShareEat different from regular delivery apps?** |
+| 3 | “Third, Groq LLM when rules and FAQ don’t match.” | **Write a one-line poem about saving food from waste** |
+
+**Page:** Buyer home · **Hard refresh:** Cmd+Shift+R before demo
+
+More detail (limitations, checklist, backup lines) → [docs/FYP-AI-REPORT-PACK.md](docs/FYP-AI-REPORT-PACK.md) · [docs/AI-ASSISTANT.md](docs/AI-ASSISTANT.md)
+
+---
 
 Public documentation in this repository:
 
@@ -230,7 +291,9 @@ Public documentation in this repository:
 | Schema visualization | [docs/SCHEMA-VISUALIZATION.md](docs/SCHEMA-VISUALIZATION.md) |
 | Business & revenue model | [REVENUE_EXPLAINED.md](REVENUE_EXPLAINED.md) |
 | FYP requirements | [docs/FYP_FUNCTIONAL_REQUIREMENTS_TABLE.md](docs/FYP_FUNCTIONAL_REQUIREMENTS_TABLE.md) |
-| FYP demo & report guide | [docs/FYP-RUNBOOK.md](docs/FYP-RUNBOOK.md) |
+| FYP demo & report guide | [FYP-RUNBOOK.md](FYP-RUNBOOK.md) |
+| FYP AI report pack (Ch. 4 & 6) | [docs/FYP-AI-REPORT-PACK.md](docs/FYP-AI-REPORT-PACK.md) |
+| AI architecture diagram | [docs/ai-architecture-diagram.html](docs/ai-architecture-diagram.html) |
 | Full doc index | [docs/README.md](docs/README.md) |
 
 ---

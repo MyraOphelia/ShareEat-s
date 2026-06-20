@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShareEat — AI Assistant Architecture (FYP Figure)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      background: #f1f5f9;
+      padding: 2rem;
+      color: #0f172a;
+    }
+    .wrap { max-width: 960px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 1.5rem; }
+    header h1 { font-size: 1.5rem; font-weight: 800; }
+    header p { color: #64748b; font-size: 0.9rem; margin-top: 0.35rem; }
+    .fig-label {
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #475569;
+      margin-bottom: 1rem;
+    }
+    .diagram {
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+      padding: 1.75rem 1.5rem 2rem;
+      box-shadow: 0 12px 40px rgba(15, 23, 42, 0.06);
+    }
+    .flow { display: flex; flex-direction: column; align-items: center; gap: 0; }
+    .box {
+      width: 100%;
+      max-width: 520px;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border: 2px solid;
+    }
+    .box small { display: block; font-weight: 500; font-size: 0.72rem; margin-top: 0.25rem; opacity: 0.85; }
+    .user { background: #ecfdf5; border-color: #4ade80; color: #14532d; }
+    .tier1 { background: #f0fdf4; border-color: #86efac; color: #166534; }
+    .tier2 { background: #eff6ff; border-color: #93c5fd; color: #1e40af; }
+    .tier3 { background: #fefce8; border-color: #fde047; color: #854d0e; }
+    .tier4 { background: #faf5ff; border-color: #d8b4fe; color: #6b21a8; }
+    .output { background: #f8fafc; border-color: #94a3b8; color: #334155; }
+    .arrow {
+      width: 2px; height: 28px; background: #cbd5e1; position: relative;
+    }
+    .arrow::after {
+      content: ''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%);
+      border: 6px solid transparent; border-top-color: #94a3b8;
+    }
+    .branch {
+      display: flex; gap: 0.5rem; width: 100%; max-width: 520px; justify-content: center;
+      flex-wrap: wrap; margin: 0.25rem 0;
+    }
+    .branch .box { flex: 1; min-width: 140px; max-width: none; font-size: 0.78rem; padding: 0.6rem; }
+    .side {
+      margin-top: 1.25rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .side .box { max-width: none; font-size: 0.78rem; }
+    .secure { background: #fef2f2; border-color: #fca5a5; color: #991b1b; }
+    .caption {
+      margin-top: 1.25rem;
+      font-size: 0.8rem;
+      line-height: 1.55;
+      color: #475569;
+      text-align: justify;
+    }
+    .legend {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      justify-content: center;
+      font-size: 0.72rem;
+      color: #64748b;
+    }
+    .legend span::before {
+      content: ''; display: inline-block; width: 10px; height: 10px;
+      border-radius: 3px; margin-right: 4px; vertical-align: middle;
+    }
+    .l1::before { background: #86efac; }
+    .l2::before { background: #93c5fd; }
+    .l3::before { background: #fde047; }
+    .l4::before { background: #d8b4fe; }
+    @media print {
+      body { background: #fff; padding: 0.5rem; }
+      .diagram { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>ShareEat AI Assistant — Layered Architecture</h1>
+      <p>Figure for Chapter 4 / Implementation — export via screenshot or Print → PDF</p>
+    </header>
+    <p class="fig-label">Figure 4.X — AI Assistant response pipeline</p>
+
+    <div class="diagram">
+      <div class="flow">
+        <div class="box user">User message<small>chat-widget.js · buyer pages</small></div>
+        <div class="arrow"></div>
+
+        <div class="box tier1">Tier 1 — Rule engine<small>Orders, cancel, nav, promos, greetings</small></div>
+        <div class="arrow"></div>
+        <div class="branch">
+          <div class="box tier1" style="opacity:0.7">Match → reply</div>
+          <div class="box tier1" style="opacity:0.5">No match ↓</div>
+        </div>
+        <div class="arrow"></div>
+
+        <div class="box tier2">Tier 2 — FAQ database<small>Supabase chat_knowledge · keyword scoring</small></div>
+        <div class="arrow"></div>
+        <div class="branch">
+          <div class="box tier2" style="opacity:0.7">Match → reply</div>
+          <div class="box tier2" style="opacity:0.5">No match ↓</div>
+        </div>
+        <div class="arrow"></div>
+
+        <div class="box tier3">Tier 3 — Live listings<small>Supabase listings · free / cheap · mini-cards</small></div>
+        <div class="arrow"></div>
+        <div class="branch">
+          <div class="box tier3" style="opacity:0.7">Listing intent → cards + View links</div>
+          <div class="box tier3" style="opacity:0.5">Else ↓</div>
+        </div>
+        <div class="arrow"></div>
+
+        <div class="box tier4">Tier 4 — Groq LLM<small>llama-3.1-8b-instant · last resort only</small></div>
+        <div class="arrow"></div>
+
+        <div class="box output">Chat UI<small>Reply · follow-up chips · thumbs up/down · CSAT</small></div>
+      </div>
+
+      <div class="side">
+        <div class="box secure">ai_chat Edge Function<small>Supabase Deno · LLM_API_KEY server-side</small></div>
+        <div class="box secure">Rate limits<small>10 msg/min (client) · token caps (Edge)</small></div>
+      </div>
+
+      <div class="legend">
+        <span class="l1">Rules (free)</span>
+        <span class="l2">FAQ DB (free)</span>
+        <span class="l3">Live data (free)</span>
+        <span class="l4">Groq LLM (fallback)</span>
+      </div>
+
+      <p class="caption">
+        <strong>Figure 4.X</strong> illustrates the layered architecture of the ShareEat AI Assistant.
+        User input is processed sequentially through rule-based logic, a trainable FAQ store,
+        and live listing retrieval before optional invocation of Groq via the <code>ai_chat</code>
+        Edge Function. The Groq API key is never exposed to the browser.
+      </p>
+    </div>
+  </div>
+</body>
+</html>
