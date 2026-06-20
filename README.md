@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://shareeat-my.vercel.app/">
-    <img src="ASSETS/LOGO.PNG" alt="ShareEat logo" width="120" />
+    <img src="./ASSETS/LOGO.PNG" alt="ShareEat logo" width="120" />
   </a>
 </p>
 
@@ -105,7 +105,7 @@ Try the deployed app — no install required.
 ShareEat is a **PWA (Progressive Web App)** — optimized for mobile. **Buyers** should use ShareEat on their **phone** (add to home screen for app-like access). **Seller** and **Admin** portals are designed for **desktop** use.
 
 <p align="center">
-  <img src="ASSETS/SCREENSHOTS/USER-POSTER.PNG" alt="ShareEat buyer experience — mobile PWA for browsing and ordering surplus food" width="100%" />
+  <img src="./ASSETS/SCREENSHOTS/USER-POSTER.PNG" alt="ShareEat buyer experience — mobile PWA for browsing and ordering surplus food" width="100%" />
 </p>
 
 <p align="center"><sub>Buyer journey — browse, order, and collect surplus food on mobile</sub></p>
@@ -117,7 +117,7 @@ ShareEat is a **PWA (Progressive Web App)** — optimized for mobile. **Buyers**
 ShareEat uses a **static frontend on Vercel** with **Supabase** as the backend (PostgreSQL, Auth, Storage, RLS, Edge Functions). The browser communicates directly with Supabase — no custom Node/API server to maintain.
 
 <p align="center">
-  <img src="ASSETS/SYSTEM-ARCHITECTURE.PNG" alt="ShareEat system architecture — users, Vercel frontend, Supabase backend, and external APIs" width="100%" />
+  <img src="./ASSETS/SYSTEM-ARCHITECTURE.PNG" alt="ShareEat system architecture — users, Vercel frontend, Supabase backend, and external APIs" width="100%" />
 </p>
 
 <p align="center"><sub>Users & roles · Frontend (Vercel) · Backend (Supabase) · External APIs (Google Maps, Resend, AI Help Chat)</sub></p>
@@ -266,7 +266,7 @@ ShareEat-s/
 
 <table>
   <tr>
-    <td width="120"><img src="ASSETS/LOGO.PNG" alt="ShareEat" width="80" /></td>
+    <td width="120"><img src="./ASSETS/LOGO.PNG" alt="ShareEat" width="80" /></td>
     <td>
       <strong>Myra Ophelia Iman Binti Maurice Feizal</strong><br />
       Bachelor of Software Engineering · Final Year Project · 2026<br /><br />
