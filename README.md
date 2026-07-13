@@ -33,6 +33,8 @@
   <a href="#highlights">Highlights</a> ·
   <a href="#live-demo">Live demo</a> ·
   <a href="#architecture">Architecture</a> ·
+  <a href="#system-architecture-layers">System layers</a> ·
+  <a href="#ai-assistant-three-layers">AI layers</a> ·
   <a href="#features">Features</a> ·
   <a href="#engineering">Engineering</a> ·
   <a href="#tech-stack">Tech stack</a> ·
@@ -114,13 +116,43 @@ ShareEat is a **PWA (Progressive Web App)** — optimized for mobile. **Buyers**
 
 ## Architecture
 
-ShareEat uses a **static frontend on Vercel** with **Supabase** as the backend (PostgreSQL, Auth, Storage, RLS, Edge Functions). The browser communicates directly with Supabase — no custom Node/API server to maintain.
+ShareEat is a **3-tier client–server web application**: static frontend on **Vercel**, **Supabase** as BaaS (Auth, PostgreSQL, Storage, RLS, Edge Functions). There is no custom Node application server — the browser talks to Supabase over HTTPS.
 
 <p align="center">
   <img src="./ASSETS/SYSTEM-ARCHITECTURE.PNG" alt="ShareEat system architecture — users, Vercel frontend, Supabase backend, and external APIs" width="100%" />
 </p>
 
-<p align="center"><sub>Users & roles · Frontend (Vercel) · Backend (Supabase) · External APIs (Google Maps, Resend, AI Help Chat)</sub></p>
+<p align="center"><sub>Users & roles · Frontend (Vercel) · Backend (Supabase) · External APIs (Google Maps, Resend, Groq AI)</sub></p>
+
+### Roles & portals
+
+| Role | Auth storage | Main flows |
+|------|--------------|------------|
+| **Buyer** | `shareeat-user-auth` | Browse → Bag → Checkout → Pickup → Profile / Messages |
+| **Seller** | `shareeat-seller-auth` | Listings → Inventory → Orders → Revenue → Messages |
+| **Admin** | `shareeat-admin-auth` | KPIs, seller approval, listings, analytics, payments, support |
+
+Separate Supabase clients let **buyer, seller, and admin** stay logged in in different tabs without overwriting sessions.
+
+### Technology stack
+
+| Layer | Technologies |
+|-------|----------------|
+| **Presentation** | HTML5, CSS3, vanilla JavaScript, PWA, responsive mobile nav |
+| **Portals** | Buyer · Seller · Admin (single codebase) |
+| **Backend (BaaS)** | Supabase — PostgreSQL, Auth, Storage, RLS, Edge Functions |
+| **AI** | Tiered chat pipeline → `ai_chat` Edge Function → **Groq** (Llama) |
+| **Email** | Resend (`shareeat.my`) |
+| **Maps** | Google Maps JavaScript API + Geocoding API |
+| **Hosting** | Vercel (primary) · Docker optional |
+| **Tooling** | Node.js, Playwright, GitHub Actions CI |
+
+### Core data flows
+
+1. **Orders & stock** — Checkout inserts `orders` + `order_items`; trigger decrements `listings.available` (single source of truth).
+2. **Messaging** — `order_messages` per order; buyer Profile/Pickup chat ↔ seller Messages.
+3. **Notifications** — `user_notifications` + in-app toasts (order ready, messages, reminders).
+4. **Governance** — Admin RLS, seller approval, listing reports, dispute replies.
 
 **Order flow:**
 
@@ -132,7 +164,159 @@ flowchart LR
     C --> A[Admin support if needed]
 ```
 
-Deep dive → **[DOCS/SYSTEM_ARCHITECTURE.md](DOCS/SYSTEM_ARCHITECTURE.md)** · **[DOCS/SYSTEM_DESIGN.md](DOCS/SYSTEM_DESIGN.md)** · **[DOCS/BACKEND.md](DOCS/BACKEND.md)**
+Deep dives → **[DOCS/SYSTEM_ARCHITECTURE.md](DOCS/SYSTEM_ARCHITECTURE.md)** · **[DOCS/SYSTEM_DESIGN.md](DOCS/SYSTEM_DESIGN.md)** · **[DOCS/BACKEND.md](DOCS/BACKEND.md)**
+
+### System architecture layers (3-tier)
+
+ShareEat follows a **classic 3-tier web architecture**: **Presentation → Application Logic → Data**.  
+There is no custom Node/Express server; **Supabase is the managed backend** (PostgreSQL, Auth, RLS, Storage, Edge Functions).
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  TIER 1 — PRESENTATION                                       │
+│  HTML · CSS · PWA · Buyer / Seller / Admin portals            │
+└────────────────────────────┬────────────────────────────────┘
+                             │
+┌────────────────────────────▼────────────────────────────────┐
+│  TIER 2 — APPLICATION LOGIC (JavaScript)                     │
+│  Checkout · Orders · Inventory · Chat · Admin · i18n · Maps  │
+│  └── AI sub-pipeline: Rules → Live DB → call Tier 3          │
+└────────────────────────────┬────────────────────────────────┘
+                             │ HTTPS (supabase-js)
+┌────────────────────────────▼────────────────────────────────┐
+│  TIER 3 — DATA & BACKEND (Supabase BaaS)                     │
+│  PostgreSQL · RLS · Triggers · RPC · Storage · Edge Functions │
+└────────────────────────────┬────────────────────────────────┘
+              ┌──────────────┼──────────────┐
+         Google Maps      Resend         Groq (via ai_chat)
+```
+
+#### Tier 1 — Presentation (what the user sees)
+
+| Item | Detail |
+|------|--------|
+| **Purpose** | UI only — pages, layout, navigation, forms, chat widget shell, map canvas |
+| **Tech** | HTML5, CSS3, responsive mobile nav, PWA manifest |
+| **Portals** | Buyer (mobile-first) · Seller · Admin |
+
+> Presentation does not hold secrets. It renders data and sends user actions to Tier 2.
+
+#### Tier 2 — Application logic (business rules)
+
+| Module | Responsibility |
+|--------|----------------|
+| **Auth & roles** | Separate sessions for buyer / seller / admin |
+| **Browse & cart** | Listings, filters, bag |
+| **Checkout** | Validation, totals, place order |
+| **Pickup & orders** | Status, swipe confirm, chat modal |
+| **Seller ops** | Accept/reject/complete, inventory sync |
+| **Admin ops** | KPIs, sellers, listings, payments, support |
+| **Messaging** | Order-scoped buyer–seller chat |
+| **AI assistant** | Tiered chat routing (see [AI layers](#ai-assistant-three-layers)) |
+| **i18n** | EN / BM / ZH / TA UI strings |
+
+> Tier 2 enforces **workflows and UX rules**. Critical security is enforced in Tier 3 (RLS + triggers), not only in the browser.
+
+#### Tier 3 — Data & backend (source of truth)
+
+| Component | Purpose |
+|-----------|---------|
+| **Tables** | `listings`, `orders`, `order_items`, `order_messages`, `profiles`, … |
+| **RLS** | Row-level security per role |
+| **Triggers** | Stock sync on order (e.g. `listings.available`) |
+| **RPCs** | `reject_order_by_seller`, `chat_check_promo_code`, … |
+| **Storage** | `listing-images` bucket |
+| **Edge Functions** | `ai_chat` (Groq proxy — API key in Supabase secrets) |
+
+#### Integration services (external)
+
+| Service | Role |
+|---------|------|
+| **Vercel** | Host static frontend |
+| **Google Maps** | Map discovery, geocoding |
+| **Resend** | Admin broadcast / email |
+| **Groq** | LLM inference — **only** via Edge Function, never in the browser |
+
+#### How the tiers work together (example: place order)
+
+1. **Tier 1** — User taps Checkout.
+2. **Tier 2** — App validates contact, computes totals, inserts `orders` + `order_items`.
+3. **Tier 3** — Postgres stores rows; trigger reduces `listings.available`; RLS enforces buyer ownership.
+4. **Tier 1** — User sees updated status on Pickup.
+
+#### Viva / showcase — common questions
+
+| Question | Answer |
+|----------|--------|
+| *“Where is your backend?”* | **Supabase BaaS** — PostgreSQL, Auth, RLS, triggers, RPCs, Edge Functions. |
+| *“Logic is only in JavaScript?”* | UX logic is Tier 2; **authorization and stock rules are enforced in Tier 3**. |
+| *“Not full stack without Node?”* | Full stack = presentation + application + data. **Managed backend** instead of self-hosted Express. |
+| *“How is stock kept consistent?”* | **Single source of truth:** `listings.available`. DB trigger on order; restore on reject RPC. |
+| *“Is AI just ChatGPT?”* | No. **Three AI sub-layers** — rules, live DB, Groq last. See [AI layers](#ai-assistant-three-layers). |
+
+**30-second summary:**  
+*“ShareEat is 3-tier: HTML/CSS presentation, modular JavaScript for buyer/seller/admin logic, and Supabase for data with RLS and triggers. The AI assistant adds three sub-layers — rules, live database, Groq last — with the API key server-side only.”*
+
+---
+
+## AI Assistant — three layers
+
+The ShareEat assistant is **not** “ChatGPT bolted on”. User messages pass through **three response types** in order. Most traffic never hits an external LLM.
+
+```
+User message (chat widget)
+        │
+        ▼
+┌───────────────────┐
+│ Layer 1 — Rules   │  Checkout, pickup, cancel policy, navigation
+│ & FAQ             │  + trainable `chat_knowledge` matches
+└─────────┬─────────┘  → Instant · no API cost
+          │ no match
+          ▼
+┌───────────────────┐
+│ Layer 2 — Live    │  Food search, halal/vegan/free/cheap filters
+│ Supabase data     │  Order status, promo check, dietary save, reorder
+└─────────┬─────────┘  → Real listing cards · grounded store names
+          │ open question
+          ▼
+┌───────────────────┐
+│ Layer 3 — Groq    │  Comparisons, advice, creative / open-ended Q&A
+│ LLM (fallback)    │  via `ai_chat` Edge Function (key server-side)
+└───────────────────┘  → Llama + live listing context in prompt
+```
+
+```mermaid
+flowchart TB
+  U[User message] --> L1{Layer 1: Rules & FAQ}
+  L1 -->|match| R1[Deterministic reply + chips]
+  L1 -->|no match| L2{Layer 2: Live data?}
+  L2 -->|listing / order / promo| DB[(Supabase)]
+  DB --> R2[Text + mini-cards / live status]
+  L2 -->|no| L3[Layer 3: ai_chat Edge Function]
+  L3 --> G[Groq llama-3.1-8b-instant]
+  G --> R3[Grounded LLM reply]
+  R1 --> UI[Chat UI + CSAT]
+  R2 --> UI
+  R3 --> UI
+```
+
+| Layer | Example prompts | What happens |
+|-------|-----------------|--------------|
+| **1 — Rules & FAQ** | `How do I checkout?` · `Where is my order?` | Keyword rules + `chat_knowledge`; follow-up chips |
+| **2 — Live DB** | `Halal food near me` · `List free food` · `Show cheap options` | Queries `listings` / `orders`; **real** store cards |
+| **3 — Groq LLM** | `ShareEat vs Grab vs Foodpanda?` · `Why does food waste matter in Malaysia?` | Edge Function → Groq; `liveListings` in system prompt |
+
+### Why Groq (not OpenAI)?
+
+| Aspect | Decision |
+|--------|----------|
+| **Architecture** | LLM is **last resort** — rules and DB handle most questions |
+| **Security** | `LLM_API_KEY` in Supabase secrets only |
+| **Cost (FYP)** | Groq free tier + token caps + client rate limit |
+| **Performance** | Low-latency inference for live demos |
+| **Flexibility** | OpenAI-compatible API — swap `LLM_BASE_URL` without frontend changes |
+
+Full AI docs → **[AI/HOW-IT-WORKS.md](AI/HOW-IT-WORKS.md)** · **[AI/AI-ASSISTANT.md](AI/AI-ASSISTANT.md)** · diagram: **[AI/AI-ARCHITECTURE-DIAGRAM.HTML](AI/AI-ARCHITECTURE-DIAGRAM.HTML)**
 
 ---
 
@@ -199,6 +383,7 @@ Technical decisions that matter to developers reviewing this project.
 | **Frontend** | HTML5, CSS3, vanilla JavaScript, PWA, responsive mobile nav |
 | **Portals** | Buyer · Seller · Admin (single codebase) |
 | **Backend** | Supabase — PostgreSQL, Auth, Storage, RLS, Edge Functions |
+| **AI** | Tiered pipeline → `ai_chat` Edge Function → Groq (Llama) |
 | **Email** | Resend (`shareeat.my`) |
 | **Maps** | Google Maps JavaScript API + Geocoding API |
 | **Hosting** | Vercel (primary), Docker optional |
@@ -250,14 +435,16 @@ ShareEat-s/
 - Three-role marketplace (buyer, seller, admin)
 - Order disputes, admin replies, in-app notifications
 - Multi-language UI (EN / BM / ZH / TA)
-- Impact tracking, badges, AI help chat
+- Impact tracking, badges
+- **Tiered AI assistant** (rules → live DB → Groq LLM via Edge Function)
+- Order-scoped buyer–seller chat
 - Mobile bottom navigation, automated tests, CI
 
 **Planned**
 
 - Live payment gateway (FPX / e-wallet)
 - Push notifications and native mobile app
-- AI API integration for chat
+- Streaming LLM responses · expanded FAQ automation
 - Nationwide seller onboarding and ESG impact reporting
 
 ---

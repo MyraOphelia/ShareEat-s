@@ -197,3 +197,46 @@ PROJECT_02_2026/
 ```
 
 This is the system architecture of ShareEat as implemented in your codebase: static frontend, Supabase for auth and data, single source of truth for stock (`listings.available`) with sync on order and reject, and clear separation between user (buyer) and seller flows and auth.
+
+---
+
+## 9. AI Assistant — Layered Architecture
+
+The floating chat widget uses a **tiered pipeline**. Messages are **not** sent to an LLM by default.
+
+### 9.1 Three response layers
+
+| Layer | Name | Trigger | Output | API cost |
+|-------|------|---------|--------|----------|
+| **1** | Rules & FAQ | App how-to, policy, keyword intents; `chat_knowledge` table | Text + navigation chips | None |
+| **2** | Live Supabase data | Food filters (halal, vegan, free, cheap), order status, promo RPC, reorder | Text + listing mini-cards or live order facts | Supabase only |
+| **3** | Groq LLM (fallback) | Open-ended questions after layers 1–2 do not apply | Generative reply with `liveListings` context | Groq via Edge Function |
+
+**Design principle:** LLM is the **last resort**, not the main brain.
+
+### 9.2 Request flow
+
+```
+Browser (chat widget)
+  ├─ Layer 1: rule engine + chat_knowledge match → reply
+  ├─ Layer 2: listings / orders / RPC → reply + cards
+  └─ Layer 3: POST ai_chat Edge Function → Groq API
+```
+
+- **Secrets:** `LLM_API_KEY`, `LLM_BASE_URL`, `LLM_MODEL` in Supabase Edge Function secrets — never in the browser.
+- **Context:** Edge function receives `message`, `history`, `context` (page, language, `liveListings`).
+- **Guards:** Client rate limit; server token caps; fallback text if Groq unavailable.
+
+### 9.3 Why Groq
+
+Groq was chosen for FYP-scale deployment: **low latency**, **free-tier guardrails**, and an **OpenAI-compatible** API. Provider can be swapped by changing Edge Function env vars.
+
+### 9.4 Demo prompts (viva / video)
+
+| Layer | Type in chat |
+|-------|----------------|
+| 1 | `How do I checkout?` |
+| 2 | `Halal food near me` · `List free food` |
+| 3 | `ShareEat vs Grab vs Foodpanda?` · `Why does food waste matter in Malaysia?` |
+
+See **[../AI/HOW-IT-WORKS.md](../AI/HOW-IT-WORKS.md)** and **[../AI/AI-ARCHITECTURE-DIAGRAM.HTML](../AI/AI-ARCHITECTURE-DIAGRAM.HTML)**.
